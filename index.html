@@ -26,15 +26,23 @@
             border-bottom: 2px solid #0ebec7;
             padding-bottom: 10px;
         }
-        .section table {
+        .columns {
+            display: flex;
+            justify-content: space-between;
+        }
+        .column {
+            flex: 1;
+            margin: 0 10px;
+        }
+        .column table {
             width: 100%;
             border-collapse: collapse;
         }
-        .section table th, .section table td {
+        .column table th, .column table td {
             padding: 10px;
             border: 1px solid #ddd;
         }
-        .section table th {
+        .column table th {
             background-color: #0ebec7;
             color: white;
         }
@@ -46,6 +54,16 @@
         canvas {
             max-width: 45%;
         }
+        .xray-container {
+            width: 45%;
+            margin-left: 20px;
+            text-align: center;
+        }
+        .xray-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -53,60 +71,63 @@
     <div class="container">
         <h1>Patient Electronic Health Record (EHR)</h1>
 
-        <!-- Patient Info -->
-        <div class="section">
-            <h2>Patient Information</h2>
-            <table>
-                <tr><th>Name</th><td>John Doe</td></tr>
-                <tr><th>DOB</th><td>January 15, 1985</td></tr>
-                <tr><th>Age</th><td>39</td></tr>
-                <tr><th>Gender</th><td>Male</td></tr>
-                <tr><th>Patient ID</th><td>123456789</td></tr>
-                <tr><th>Phone</th><td>(555) 123-4567</td></tr>
-                <tr><th>Primary Care Physician</th><td>Dr. Alice Johnson</td></tr>
-            </table>
+        <!-- Patient Info, Vitals, Medications as Columns -->
+        <div class="columns">
+            <!-- Patient Information -->
+            <div class="column">
+                <div class="section">
+                    <h2>Patient Information</h2>
+                    <table>
+                        <tr><th>Name</th><td>John Doe</td></tr>
+                        <tr><th>DOB</th><td>January 15, 1985</td></tr>
+                        <tr><th>Age</th><td>39</td></tr>
+                        <tr><th>Gender</th><td>Male</td></tr>
+                        <tr><th>Patient ID</th><td>123456789</td></tr>
+                        <tr><th>Phone</th><td>(555) 123-4567</td></tr>
+                        <tr><th>Primary Care Physician</th><td>Dr. Alice Johnson</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Vital Signs -->
+            <div class="column">
+                <div class="section">
+                    <h2>Vital Signs</h2>
+                    <table>
+                        <tr><th>Blood Pressure</th><td>120/80 mmHg</td></tr>
+                        <tr><th>Heart Rate</th><td>72 bpm</td></tr>
+                        <tr><th>Temperature</th><td>98.6°F (37°C)</td></tr>
+                        <tr><th>Height</th><td>5'10" (178 cm)</td></tr>
+                        <tr><th>Weight</th><td>175 lbs (79 kg)</td></tr>
+                        <tr><th>BMI</th><td>25.1</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Medications -->
+            <div class="column">
+                <div class="section">
+                    <h2>Medications</h2>
+                    <table>
+                        <tr><th>Medication</th><th>Dosage</th><th>Purpose</th></tr>
+                        <tr><td>Lisinopril</td><td>10mg daily</td><td>Hypertension</td></tr>
+                        <tr><td>Albuterol Inhaler</td><td>As needed</td><td>Asthma</td></tr>
+                        <tr><td>Multivitamin</td><td>Daily</td><td>General Health</td></tr>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <!-- Vital Signs -->
-        <div class="section">
-            <h2>Vital Signs</h2>
-            <table>
-                <tr><th>Blood Pressure</th><td>120/80 mmHg</td></tr>
-                <tr><th>Heart Rate</th><td>72 bpm</td></tr>
-                <tr><th>Temperature</th><td>98.6°F (37°C)</td></tr>
-                <tr><th>Height</th><td>5'10" (178 cm)</td></tr>
-                <tr><th>Weight</th><td>175 lbs (79 kg)</td></tr>
-                <tr><th>BMI</th><td>25.1</td></tr>
-            </table>
-        </div>
-
-        <!-- Medication -->
-        <div class="section">
-            <h2>Medications</h2>
-            <table>
-                <tr><th>Medication</th><th>Dosage</th><th>Purpose</th></tr>
-                <tr><td>Lisinopril</td><td>10mg daily</td><td>Hypertension</td></tr>
-                <tr><td>Albuterol Inhaler</td><td>As needed</td><td>Asthma</td></tr>
-                <tr><td>Multivitamin</td><td>Daily</td><td>General Health</td></tr>
-            </table>
-        </div>
-
-        <!-- Lab Results & Graphs -->
-        <div class="section">
-            <h2>Lab Results</h2>
-            <table>
-                <tr><th>Test</th><th>Result</th><th>Normal Range</th></tr>
-                <tr><td>Cholesterol</td><td>180 mg/dL</td><td>&lt;200 mg/dL</td></tr>
-                <tr><td>Blood Sugar (Fasting)</td><td>90 mg/dL</td><td>70-99 mg/dL</td></tr>
-                <tr><td>Hemoglobin A1c</td><td>5.4%</td><td>&lt;5.7%</td></tr>
-                <tr><td>Creatinine</td><td>0.9 mg/dL</td><td>0.7-1.3 mg/dL</td></tr>
-            </table>
-        </div>
-
-        <!-- Graphs -->
+        <!-- Graphs and X-Ray -->
         <div class="graphs">
-            <canvas id="medicationChart"></canvas>
-            <canvas id="labResultsChart"></canvas>
+            <div>
+                <canvas id="medicationChart"></canvas>
+                <canvas id="labResultsChart"></canvas>
+            </div>
+            <div class="xray-container">
+                <h2>X-Ray of Broken Leg</h2>
+                <img src="https://example.com/xray-broken-leg.jpg" alt="X-Ray of Broken Leg">
+            </div>
         </div>
     </div>
 
