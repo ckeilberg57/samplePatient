@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient EHR Chart</title>
+    <title>Patient Electronic Health Record (EHR)</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,6 +53,7 @@
         }
         canvas {
             max-width: 45%;
+            height: auto;
         }
         .xray-container {
             width: 45%;
@@ -125,59 +126,62 @@
                 <canvas id="labResultsChart"></canvas>
             </div>
             <div class="xray-container">
-                <h2>X-Ray of Broken Leg</h2>
-                <img src="https://via.placeholder.com/300x400.png?text=Broken+Leg+X-Ray" alt="X-Ray of Broken Leg">
+                <h2>X-Ray of Broken Bone</h2>
+                <img src="broken.jpg" alt="X-Ray of Broken Bone">
             </div>
         </div>
     </div>
 
     <script>
-        // Medication Distribution Chart (Pie Chart)
-        const medicationCtx = document.getElementById('medicationChart').getContext('2d');
-        const medicationChart = new Chart(medicationCtx, {
-            type: 'pie',
-            data: {
-                labels: ['Lisinopril', 'Albuterol Inhaler', 'Multivitamin'],
-                datasets: [{
-                    data: [1, 1, 1], // Equal values as placeholders for now
-                    backgroundColor: ['#ff7273', '#0ebec7', '#f39c12']
-                }]
-            },
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: 'Medication Distribution'
-                }
-            }
-        });
-
-        // Lab Results Chart (Bar Graph)
-        const labResultsCtx = document.getElementById('labResultsChart').getContext('2d');
-        const labResultsChart = new Chart(labResultsCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Cholesterol', 'Blood Sugar', 'Hemoglobin A1c', 'Creatinine'],
-                datasets: [{
-                    label: 'Lab Results',
-                    data: [180, 90, 5.4, 0.9],
-                    backgroundColor: ['#0ebec7', '#f39c12', '#e74c3c', '#8e44ad']
-                }]
-            },
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: 'Recent Lab Results'
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
+        // Ensure Chart.js is loaded and then create charts
+        document.addEventListener('DOMContentLoaded', function () {
+            // Medication Distribution Chart (Pie Chart)
+            const medicationCtx = document.getElementById('medicationChart').getContext('2d');
+            const medicationChart = new Chart(medicationCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Lisinopril', 'Albuterol Inhaler', 'Multivitamin'],
+                    datasets: [{
+                        data: [1, 1, 1], // Equal values as placeholders for now
+                        backgroundColor: ['#ff7273', '#0ebec7', '#f39c12']
                     }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Medication Distribution'
+                    }
                 }
-            }
+            });
+
+            // Lab Results Chart (Bar Graph)
+            const labResultsCtx = document.getElementById('labResultsChart').getContext('2d');
+            const labResultsChart = new Chart(labResultsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Cholesterol', 'Blood Sugar', 'Hemoglobin A1c', 'Creatinine'],
+                    datasets: [{
+                        label: 'Lab Results',
+                        data: [180, 90, 5.4, 0.9],
+                        backgroundColor: ['#0ebec7', '#f39c12', '#e74c3c', '#8e44ad']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Recent Lab Results'
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
         });
     </script>
 </body>
